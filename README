@@ -1,0 +1,10 @@
+Package xmltest provides utilities for XML testing.
+
+I contributed this code to golang.org/x/net/webdav but found it might be
+useful outside that package. Use it to compare if XML content is equal on
+a semantic but not on byte level.
+
+Note: The normalised XML output of this package is not equivalent to
+Canonical XML.  If there is enough interest I might get into that.
+
+This package requires a recent Go 1.5 release candidate.
