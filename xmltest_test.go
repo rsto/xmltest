@@ -145,6 +145,31 @@ func TestEqualXML(t *testing.T) {
 		b:         "<root/>",
 		wantEqual: true,
 		// TODO define more test cases for EqualXML
+	}, {
+		desc:      "prefixed vs default namespace",
+		a:         `<s:root xmlns:s="space"/>`,
+		b:         `<root xmlns="space"/>`,
+		wantEqual: true,
+	}, {
+		desc:      "prefixed namespaces",
+		a:         `<s:root xmlns:s="space"/>`,
+		b:         `<t:root xmlns:t="space"/>`,
+		wantEqual: true,
+	}, {
+		desc:      "ignored prefixes",
+		a:         `<s:root xmlns:s="space" xmlns:f="foo"/>`,
+		b:         `<root xmlns="space"/>`,
+		wantEqual: true,
+	}, {
+		desc: "whitespace not omitted by default",
+		a:    `<root>  </root>`,
+		b:    `<root/>`,
+	}, {
+		desc:      "omit whitespace with custom normalizer",
+		n:         Normalizer{OmitWhitespace: true},
+		a:         `<root>  </root>`,
+		b:         `<root/>`,
+		wantEqual: true,
 	}}
 
 	for _, tc := range testCases {
